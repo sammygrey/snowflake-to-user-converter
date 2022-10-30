@@ -3,17 +3,15 @@ if error != null
     details
       summary(class=error) > Oops! Something went wrong. ✘
       p(class=error)= error
-
 if user != null
   div(class="usercard")
-    if user.banner != 
-    img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
+    if user.banner != null
+      img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
     //- div(class="banner-color")
       - span=data.banner_color
-    if user.avatar !=
-    img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
+    if user.avatar != null
+      img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
     div(class="userContainer")
       span(class="username")=`${user.username}#${user.discriminator}`
       span(class="userID")=`Discord ID: ${user.id}`
-
 script(src="script.js")
