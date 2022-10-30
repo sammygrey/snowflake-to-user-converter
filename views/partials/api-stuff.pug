@@ -1,0 +1,17 @@
+if error != null
+  div(class="errorcard")
+    details
+      summary(class=error) > Oops! Something went wrong. ✘
+      p(class=error)= error
+
+if user != null
+  div(class="usercard")
+    img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
+    //- div(class="banner-color")
+      - span=data.banner_color
+    img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
+    div(class="userContainer")
+      span(class="username")=`${user.username}#${user.discriminator}`
+      span(class="userID")=`Discord ID: ${user.id}`
+
+script(src="script.js")
