@@ -6,10 +6,12 @@ if error != null
 
 if user != null
   div(class="usercard")
-    img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
+    if user.banner != 
+    img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
     //- div(class="banner-color")
       - span=data.banner_color
-    img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
+    if user.avatar !=
+    img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
     div(class="userContainer")
       span(class="username")=`${user.username}#${user.discriminator}`
       span(class="userID")=`Discord ID: ${user.id}`
