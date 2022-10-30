@@ -37,6 +37,9 @@ details {
 details > p {
 	font-size: 1em;
 	text-align: left;
+}
+
+.howto > p {
 	margin-left: 100px;
 	margin-right: 100px;
 }
@@ -197,6 +200,7 @@ main > p {
 }
 
 .errorcard{
+	position:relative;
 	font-weight: bold;
 	font-size: 1.5em;
 	height: 2em;
@@ -212,6 +216,7 @@ main > p {
 	margin-right: 200px;
 	margin-top: 25px;
 	padding-top: 5px;
+	z-index: 1;
 }
 
 .errorcard > p {

@@ -1,17 +1,21 @@
-if error != null
-  div(class="errorcard")
-    details
-      summary(class=error) > Oops! Something went wrong. ✘
-      p(class=error)= error
+
 if user != null
-  div(class="usercard")
-    if user.banner != null
-      img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
-    //- div(class="banner-color")
-      - span=data.banner_color
-    if user.avatar != null
-      img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
-    div(class="userContainer")
-      span(class="username")=`${user.username}#${user.discriminator}`
-      span(class="userID")=`Discord ID: ${user.id}`
+  if (user.message != null || error != null)
+    div(class="errorcard")
+      details
+        summary(class=error) > Oops! Something went wrong. ✘
+        p(class=error)= `message: ${user.message}, code: ${user.code}`
+        p(class=error)
+        | For more information check <a href='https://discord.com/developers/docs/topics/opcodes-and-status-codes' target="_blank">here.</a>
+  else
+    div(class="usercard")
+      if user.banner != null
+        img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
+      //- div(class="banner-color")
+        - span=data.banner_color
+      if user.avatar != null
+        img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
+      div(class="userContainer")
+        span(class="username")=`${user.username}#${user.discriminator}`
+        span(class="userID")=`Discord ID: ${user.id}`
 script(src="script.js")
