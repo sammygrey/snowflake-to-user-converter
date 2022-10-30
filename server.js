@@ -37,7 +37,7 @@ app.get('/*', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Server is listening on port ${PORT}`)
+  console.log(`Server is listening on port ${port}`)
 });
 
 //if avatar is null find out how to do a randomly generated discord pfp
