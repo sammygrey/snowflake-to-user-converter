@@ -12,7 +12,7 @@ if user != null
       if user.banner != null
         img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
       else if user.banner_color != null
-        img(class="banner" src='/images/default_banner.png' style={"background-color": `${user.banner_color}`})
+        img(class="banner" src='/images/default_banner.png' style={"background-color": `${user.banner_color}`, 'max-height': '75px'})
       else if user.avatar != null 
         -//figure out how discord gets average color of pfps
       else  
