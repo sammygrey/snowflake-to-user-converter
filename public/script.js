@@ -58,12 +58,12 @@ $(document).ready(function() {
     userInput.addEventListener('input', parseInput)
     userInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter'){
-            location.href = `http://${location.href.split('/')[2]}/${userInput.value}`
+            location.href = `https://${location.href.split('/')[2]}/${userInput.value}`
         }
     })
     submitButton.addEventListener('click', function(e) {
         if (userInput.value != ''){
-            location.href = `http://${location.href.split('/')[2]}/${userInput.value}`
+            location.href = `https://${location.href.split('/')[2]}/${userInput.value}`
         }
     })
 });

@@ -11,10 +11,38 @@ if user != null
     div(class="usercard")
       if user.banner != null
         img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
+      else if user.banner_color != null
+        img(class="banner" src='/images/default_banner.png' style={"background-color": `${user.banner_color}`})
+      else if user.avatar != null 
+        -//figure out how discord gets average color of pfps
+      else  
+        case (parseInt(user.discriminator) % 5)
+          when 0
+            img(class="banner" src='/images/default_banner.png' style={"background-color": '#5865f2', 'max-height': '75px'})
+          when 1
+            img(class="banner" src='/images/default_banner.png' style={"background-color": '#757e8a', 'max-height': '75px'})
+          when 2
+            img(class="banner" src='/images/default_banner.png' style={"background-color": '#3ba55c', 'max-height': '75px'})
+          when 3
+            img(class="banner" src='/images/default_banner.png' style={"background-color": '#Faa61a', 'max-height': '75px'})
+          when 4
+            img(class="banner" src='/images/default_banner.png' style={"background-color": '#ed4245', 'max-height': '75px'})
       //- div(class="banner-color")
         - span=data.banner_color
       if user.avatar != null
         img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
+      else 
+        case (parseInt(user.discriminator) % 5)
+          when 0
+            img(class="avatar" src='/images/default_blurple.png')
+          when 1
+            img(class="avatar" src='/images/default_grey.png')
+          when 2
+            img(class="avatar" src='/images/default_green.png')
+          when 3
+            img(class="avatar" src='/images/default_orange.png')
+          when 4
+            img(class="avatar" src='/images/default_red.png')
       div(class="userContainer")
         span(class="username")=`${user.username}#${user.discriminator}`
         span(class="userID")=`Discord ID: ${user.id}`
