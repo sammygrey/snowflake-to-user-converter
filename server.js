@@ -8,10 +8,17 @@ app.set('view engine', 'pug');
 app.use(express.static("public"))
 
 app.get('/*', (req, res) => {
-  userString = req.originalUrl.slice(1);
-  
-  userID = userString.replace(/\D/g,'')
+
+  //between 2 and 32 characters
+  // only allow latin characters, 0-9, _, .
+  // all lowercase
+  // cannot use consecutive .s
+  // /[^a-zA-Z0-9_.]|(?<=\.)\./g
+  var userString = req.originalUrl.slice(1);
+  const userID = userString.replace(/\D/g,'')
+
   if (userID == ''){
+    //maybe add something further here about how long user strings must be
     res.render("index", {user: null, error: null})
     return
   }
@@ -19,14 +26,15 @@ app.get('/*', (req, res) => {
     res.redirect(301, ("/" + userID))
     return
   }
-  const data = fetch(`https://discord.com/api/v10/users/${userString}`, {
+
+  const data = fetch(`https://discord.com/api/v10/users/${userID}`, {
     mode: 'no-cors',
     headers: {
         Authorization: `Bot ${token}`
       }
     }) .then((response) => response.json())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
       res.render("index", {user: data, error: null})
       return data
     })
@@ -40,18 +48,3 @@ app.get('/*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
 });
-
-//if avatar is null find out how to do a randomly generated discord pfp
-//if banner is null find out how to do a randomly generated discord banner
-
-// username + discriminator
-
-// "avatar decoration"
-
-// banner hash
-
-// banner color
-
-//accent color
-
-//if they are a bot

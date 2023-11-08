@@ -4,8 +4,8 @@ var stateObj = { id: "100" };
 const parseInput = e => {
     const userString = e.target.value
     var filteredString = userString.replace(/\D/g,'') 
-    userInput.value = filteredString
-    console.log(filteredString.length)
+    userInput.value = filteredString.toLowerCase()
+    //console.log(filteredString.length)
     if (filteredString.length === 0){
         filteredString = './'
     }
@@ -17,7 +17,7 @@ const parseInput = e => {
 }
 
 const getTime = userID => {
-    //convert snowflake to binary
+    //convert string to binary
     var valid = true
     var intID
     try{
@@ -58,12 +58,12 @@ $(document).ready(function() {
     userInput.addEventListener('input', parseInput)
     userInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter'){
-            location.href = `https://${location.href.split('/')[2]}/${userInput.value}`
+            location.href = `http://${location.href.split('/')[2]}/${userInput.value}`
         }
     })
     submitButton.addEventListener('click', function(e) {
         if (userInput.value != ''){
-            location.href = `https://${location.href.split('/')[2]}/${userInput.value}`
+            location.href = `http://${location.href.split('/')[2]}/${userInput.value}`
         }
     })
 });

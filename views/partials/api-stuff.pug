@@ -9,12 +9,14 @@ if user != null
         | For more information check <a href='https://discord.com/developers/docs/topics/opcodes-and-status-codes' target="_blank">here.</a>
   else
     div(class="usercard")
-      if user.banner != null
-        img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
-      else if user.banner_color != null
-        img(class="banner" src='/images/default_banner.png' style={"background-color": `${user.banner_color}`, 'max-height': '75px'})
-      else if user.avatar != null 
-        -//figure out how discord gets average color of pfps
+      if user.banner_color != null || user.accent_color != null
+        if user.banner != null
+          img(class="banner" src=`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=512`)
+        else
+          img(class="banner" src='/images/default_banner.png' style={"background-color": `${(user.accent_color).toString(16)||user.banner_color}`, 'max-height': '75px'})
+        div(class="banner-color")
+          span=`${(user.accent_color).toString(16)||user.banner_color}`
+      //- replace below eventually using weighted averaging code to get auto banner color
       else  
         case (parseInt(user.discriminator) % 5)
           when 0
@@ -27,23 +29,25 @@ if user != null
             img(class="banner" src='/images/default_banner.png' style={"background-color": '#Faa61a', 'max-height': '75px'})
           when 4
             img(class="banner" src='/images/default_banner.png' style={"background-color": '#ed4245', 'max-height': '75px'})
-      //- div(class="banner-color")
-        - span=data.banner_color
       if user.avatar != null
         img(class="avatar" src=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`)
       else 
         case (parseInt(user.discriminator) % 5)
           when 0
-            img(class="avatar" src='/images/default_blurple.png')
+            img(class="avatar" src='/images/default_pfps/default_blurple.png')
           when 1
-            img(class="avatar" src='/images/default_grey.png')
+            img(class="avatar" src='/images/default_pfps/default_grey.png')
           when 2
-            img(class="avatar" src='/images/default_green.png')
+            img(class="avatar" src='/images/default_pfps/default_green.png')
           when 3
-            img(class="avatar" src='/images/default_orange.png')
+            img(class="avatar" src='/images/default_pfps/default_orange.png')
           when 4
-            img(class="avatar" src='/images/default_red.png')
+            img(class="avatar" src='/images/default_pfps/default_red.png')
       div(class="userContainer")
-        span(class="username")=`${user.username}#${user.discriminator}`
+        if user.discriminator != '0'
+          span(class="username")=`${user.username}#${user.discriminator}`
+        else
+          span(class="username")=`${user.global_name}`
+          span(class="username")=`@${user.username}`
         span(class="userID")=`Discord ID: ${user.id}`
 script(src="script.js")
